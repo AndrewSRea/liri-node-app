@@ -110,6 +110,7 @@ function doIt(value) {
         spotifyThisSong(dataArr[0], dataArr[1]);
     })
 }
+<<<<<<< HEAD
 
 //Commands: concert-this; spotify-this-song; movie-this; do-what-it-says; will run functions when typed in Terminal
 //node liri.js concert-this <artist/band name here> will search the Bands In Town Events API 
@@ -119,3 +120,5 @@ function doIt(value) {
 //node liri.js spotify-this-song '<song name here>' will show the following info about the song in your Terminal:
 //1) artist; 2) song's name; 3) a preview link of the song from Spotify; 4) the album that the song is from;
 //(If no song is provided, then program will default to "The Sign" from Ace of Base.) [Read steps for Spotify API.]
+=======
+>>>>>>> 76a6e07d6a35f2af80acbc729b974659c90abb93
