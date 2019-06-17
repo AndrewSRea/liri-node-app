@@ -6,4 +6,4 @@ takes in parameters and gives you back data.
 
 LIRI-Bot will take your commands on the command line in Terminal (Bash) to search BandsInTown for music concerts (by typing `node liri.js 
 concert-this <artist/band name>`), Spotify for songs (by typing `node liri.js spotify-this-song <song name>`, and OMDB for movies (by
-typing `node liri.js movie-this <movie name>`. 
+typing `node liri.js movie-this <movie name>`).
