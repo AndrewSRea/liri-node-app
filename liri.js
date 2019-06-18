@@ -3,60 +3,85 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
-
-var moment = require("moment");
-moment().format();
-
 var axios = require("axios");
-
+var moment = require("moment");
 var fs = require("fs");
-
 var command = process.argv[2];
-var value = process.argv[3];
+var arg = process.argv;
+var reference = [];
+var fileName = "log.txt";
+var fullCommand = [];
+
+for (var i = 3; i < arg.length; i++) {
+    reference.push(arg[i]);
+}
+
+var referenceBand = reference.join("");
+
+fullCommand.push(command);
+if(reference.length !=0) {
+    fullCommand.push(referenceBand);
+}
+
+function logging(value) {
+    fs.appendFile(fileName, "," + value, function(err) {
+        if (err) {
+            return console.log("You received an error.");
+        }
+    })
+}
+
+logging(fullCommand)
 
 if(command === "concert-this") {
-	concertThis(value);
+	concertThis(referenceBand);
 } else if(command === "spotify-this-song") {
-	spotifyThisSong(value);
+	spotifyThisSong(reference);
 } else if(command === "movie-this") {
-	movieThis(value);
+	movieThis(reference);
 } else if(command === "do-what-it-says") {
-    doIt(value);
+    doIt();
 };
 
 // 1. node liri.js concert-this <artist/band name here>
 
-function concertThis(value) {
-    axios.get("https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp")
-    .then(function(response) {    
-        for (var i = 0; i < response.data.length; i++) {
+function concertThis(referenceBand) {
+    var bandURL = "https://rest.bandsintown.com/artists/" + referenceBand + "/events?app_id=codingbootcamp";
+    axios.get(bandURL).then(
+        function(response) {    
+            console.log("  ");
+            console.log("GETTING THE BAND/ARTIST INFORMATION: " + referenceBand);
+            for (var i = 0; i < response.data.length; i++) {
 
-            var datetime = response.data[i].datetime;
-            var dateArr = datetime.split('T');
+                var datetime = response.data[i].datetime;
+                var dateArr = datetime.split('T');
 
-            var concertResults = 
-                "--------------------------------------------------------------------" +
-                    "\nVenue Name: " + response.data[i].venue.name + 
-                    "\nVenue Location: " + response.data[i].venue.city +
-                    "\nDate of the Event: " + moment(dateArr[0], "MM-DD-YYYY");
-            console.log(concertResults);
-        }
-    })
-    .catch(function (error) {
-        console.log(error);
+                var concertResults = 
+                    "--------------------------------------------------------------------" +
+                        "\nVenue Name: " + response.data[i].venue.name + 
+                        "\nVenue Location: " + response.data[i].venue.city +
+                        "\nDate of the Event: " + moment(dateArr[0], "MM-DD-YYYY");
+                console.log(concertResults);
+            }
+        })
+        .catch(function (error) {
+            console.log("This is an " + error);
     });
 }
 
 
 // 2. node liri.js spotify-this-song '<song name here>'
 
-function spotifyThisSong(value) {
-    if(!value){
-        value = "The Sign";
+function spotifyThisSong(reference) {
+    if(!reference.length === 0){
+        reference = "The Sign";
     }
     spotify
-    .search({ type: 'track', query: value })
+    .search({ type: 'track', query: reference })
     .then(function(response) {
+        console.log(" ");
+        console.log("SEARCHING SPOTIFY FOR: " + reference);
+        console.log(" ");
         for (var i = 0; i < 5; i++) {
             var spotifyResults = 
                 "--------------------------------------------------------------------" +
@@ -75,11 +100,11 @@ function spotifyThisSong(value) {
 
 // 3. node liri.js movie-this '<movie name here>'
 
-function movieThis(value) {
-    if(!value) {
-        value = "mr nobody";
+function movieThis(reference) {
+    if(reference.length === 0) {
+        reference = "mr nobody";
     }
-    axios.get("https://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy")
+    axios.get("https://www.omdbapi.com/?t=" + reference + "&y=&plot=short&apikey=trilogy")
     .then(function(response) {
             var movieResults = 
                 "--------------------------------------------------------------------" +
