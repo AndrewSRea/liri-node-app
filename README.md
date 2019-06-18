@@ -21,7 +21,7 @@ This will search the Spotify app for a specific song and render the following in
 * A preview link of the song from Spotify
 * The album that the song is from
 
-`node liri.js movie-this <movie name>`).
+`node liri.js movie-this <movie name>`
 This will search the OMDB App for a movie and render the following information:
 
 * Title of the movie
