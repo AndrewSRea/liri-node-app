@@ -13,7 +13,7 @@ This will search the BandsInTown.com for an artist and render the following info
 * Venue location
 * Date of the event
 
-![Image of the concert-this command (images/concert-image.jpg)
+![Image of the concert-this command] (images/concert-image.jpg)
 
 `node liri.js spotify-this-song <song name>`
 This will search the Spotify app for a specific song and render the following information:
@@ -23,7 +23,7 @@ This will search the Spotify app for a specific song and render the following in
 * A preview link of the song from Spotify
 * The album that the song is from
 
-![Image of the spotify-this-song command (images/spotify-image.jpg)
+![Image of the spotify-this-song command] (images/spotify-image.jpg)
 
 `node liri.js movie-this <movie name>`
 This will search the OMDB App for a movie and render the following information:
@@ -37,10 +37,10 @@ This will search the OMDB App for a movie and render the following information:
 * Plot of the movie
 * Actors/Actresses in the movie
 
-![Image of the movie-this command (images/movie-image.jpg)
+![Image of the movie-this command] (images/movie-image.jpg)
 
 Also, typing `node liri.js do-what-it-says` will run a random command on the Terminal.
 
-![Image of the do-what-it-says command (images/do-what-it-says.jpg)
+![Image of the do-what-it-says command] (images/do-what-it-says.jpg)
 
 Have fun!
